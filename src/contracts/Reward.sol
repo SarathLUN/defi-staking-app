@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
 contract Reward {
@@ -21,7 +22,7 @@ contract Reward {
     mapping(address => uint) public balanceOf;
     mapping(address => mapping(address => uint)) public allowance;
 
-    constructor() public{
+    constructor() {
         balanceOf[msg.sender] = totalSupply;
     }
 
