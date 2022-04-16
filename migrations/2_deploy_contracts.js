@@ -10,10 +10,12 @@ module.exports = async function(deployer, network, accounts){
     await deployer.deploy(Reward)
     const rwd = await Reward.deployed()
 
-    await deployer.deploy(DecentralBank)
+    // deploy DecentralBank contract, and because the construct require 2 more params
+    await deployer.deploy(DecentralBank, rwd.address, tether.address)
+    const decentralBank = await DecentralBank.deployed()
 
     // transfer all reward token to decentral bank
-    await rwd.transfer(DecentralBank.address,'1000000000000000000000000')
+    await rwd.transfer(decentralBank.address,'1000000000000000000000000')
 
     // distribute 100 tether to investor once they registering
     // in this example, we will take the 2nd account of Ganache as 1 investor
